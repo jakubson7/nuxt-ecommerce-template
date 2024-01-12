@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/i18n": "^8.0.0",
     "@typescript-eslint/parser": "^6.18.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
