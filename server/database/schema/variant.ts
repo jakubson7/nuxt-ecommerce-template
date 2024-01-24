@@ -12,7 +12,7 @@ export const variants = sqliteTable("variants", {
   metadata: text("metadata").notNull().default("{}"),
 });
 
-export const variantsContent = sqliteTable(
+export const variantContents = sqliteTable(
   "variantsContent",
   {
     variantID: integer("variantID")
@@ -32,5 +32,5 @@ export const variantsContent = sqliteTable(
 
 export type Variant = typeof variants.$inferSelect;
 export type InsertVariant = typeof variants.$inferInsert;
-export type VariantContent = typeof variantsContent.$inferSelect;
-export type InsertVariantContent = typeof variantsContent.$inferInsert;
+export type VariantContent = typeof variantContents.$inferSelect;
+export type InsertVariantContent = typeof variantContents.$inferInsert;

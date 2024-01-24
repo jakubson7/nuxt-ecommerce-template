@@ -6,6 +6,7 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { Locale, Currency } from "~/i18n/config";
 import { locales } from "./locale";
+import { relations } from "drizzle-orm";
 
 export const products = sqliteTable("products", {
   ID: integer("ID").primaryKey(),
@@ -13,7 +14,7 @@ export const products = sqliteTable("products", {
   metadata: text("metadata").notNull().default("{}"),
 });
 
-export const productsPrice = sqliteTable("productsPrice", {
+export const productPrices = sqliteTable("productPrices", {
   ID: integer("ID").primaryKey(),
   productID: integer("productID")
     .notNull()
@@ -27,8 +28,8 @@ export const productsPrice = sqliteTable("productsPrice", {
   metadata: text("metadata").notNull().default("{}"),
 });
 
-export const productsContent = sqliteTable(
-  "productsContent",
+export const productContents = sqliteTable(
+  "productContents",
   {
     productID: integer("productID")
       .notNull()
@@ -46,9 +47,31 @@ export const productsContent = sqliteTable(
   })
 );
 
+export const productsRelations = relations(products, ({ many }) => ({
+  prices: many(productPrices),
+  contents: many(productContents),
+}));
+
+export const productPricesRelations = relations(productPrices, ({ one }) => ({
+  product: one(products, {
+    fields: [productPrices.productID],
+    references: [products.ID],
+  }),
+}));
+
+export const productContentsRelations = relations(
+  productContents,
+  ({ one }) => ({
+    product: one(products, {
+      fields: [productContents.productID],
+      references: [products.ID],
+    }),
+  })
+);
+
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;
-export type ProductPrice = typeof productsPrice.$inferSelect;
-export type InsertProductPrice = typeof productsPrice.$inferInsert;
-export type ProductContent = typeof productsContent.$inferSelect;
-export type InsertProductContent = typeof productsContent.$inferInsert;
+export type ProductPrice = typeof productPrices.$inferSelect;
+export type InsertProductPrice = typeof productPrices.$inferInsert;
+export type ProductContent = typeof productContents.$inferSelect;
+export type InsertProductContent = typeof productContents.$inferInsert;
