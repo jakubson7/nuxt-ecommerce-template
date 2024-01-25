@@ -15,6 +15,20 @@
       "when": 1706122436448,
       "tag": "0001_flowery_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706220505478,
+      "tag": "0002_condemned_iron_monger",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706221124328,
+      "tag": "0003_wooden_luckman",
+      "breakpoints": true
     }
   ]
 }
