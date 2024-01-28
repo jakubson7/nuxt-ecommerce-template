@@ -29,6 +29,13 @@
       "when": 1706221124328,
       "tag": "0003_wooden_luckman",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1706434386677,
+      "tag": "0004_fluffy_jack_flag",
+      "breakpoints": true
     }
   ]
 }

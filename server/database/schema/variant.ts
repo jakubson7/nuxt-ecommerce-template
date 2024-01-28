@@ -9,12 +9,19 @@ import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 import { ProductVariantType } from "../models/variant";
 import { productVariants } from "./product";
+import { storageUnits } from "./storage";
 
 export const variants = sqliteTable("variants", {
   ID: integer("ID").primaryKey(),
   value: text("value").notNull(),
   type: text("type").notNull().$type<ProductVariantType>(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
+  createdAt: integer("createdAt", { mode: "timestamp_ms" })
+    .notNull()
+    .$defaultFn(() => new Date()),
+  updatedAt: integer("updatedAt", { mode: "timestamp_ms" })
+    .notNull()
+    .$defaultFn(() => new Date()),
 });
 
 export const variantContents = sqliteTable(
@@ -29,6 +36,12 @@ export const variantContents = sqliteTable(
       .references(() => locales.ID),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
+    createdAt: integer("createdAt", { mode: "timestamp_ms" })
+      .notNull()
+      .$defaultFn(() => new Date()),
+    updatedAt: integer("updatedAt", { mode: "timestamp_ms" })
+      .notNull()
+      .$defaultFn(() => new Date()),
   },
   (table) => ({
     pk: primaryKey({ columns: [table.variantID, table.locale] }),
@@ -38,6 +51,7 @@ export const variantContents = sqliteTable(
 export const variantsRelations = relations(variants, ({ many }) => ({
   contents: many(variantContents),
   productVariants: many(productVariants),
+  storageUnits: many(storageUnits),
 }));
 
 export const variantsContentsRelations = relations(
@@ -49,8 +63,3 @@ export const variantsContentsRelations = relations(
     }),
   })
 );
-
-export type Variant = typeof variants.$inferSelect;
-export type InsertVariant = typeof variants.$inferInsert;
-export type VariantContent = typeof variantContents.$inferSelect;
-export type InsertVariantContent = typeof variantContents.$inferInsert;

@@ -1,0 +1,538 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "id": "03cb4560-c42e-4417-99e6-a102b6fe82c4",
+  "prevId": "ce4fdbec-3179-4768-885c-06d2c5baf016",
+  "tables": {
+    "productContents": {
+      "name": "productContents",
+      "columns": {
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "productContents_productID_products_ID_fk": {
+          "name": "productContents_productID_products_ID_fk",
+          "tableFrom": "productContents",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "productContents_locale_locales_ID_fk": {
+          "name": "productContents_locale_locales_ID_fk",
+          "tableFrom": "productContents",
+          "tableTo": "locales",
+          "columnsFrom": [
+            "locale"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "productContents_productID_locale_pk": {
+          "columns": [
+            "locale",
+            "productID"
+          ],
+          "name": "productContents_productID_locale_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "productPrices": {
+      "name": "productPrices",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "currency": {
+          "name": "currency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "productPrices_productID_products_ID_fk": {
+          "name": "productPrices_productID_products_ID_fk",
+          "tableFrom": "productPrices",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "productPrices_locale_locales_ID_fk": {
+          "name": "productPrices_locale_locales_ID_fk",
+          "tableFrom": "productPrices",
+          "tableTo": "locales",
+          "columnsFrom": [
+            "locale"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "productVariants": {
+      "name": "productVariants",
+      "columns": {
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "variantID": {
+          "name": "variantID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "isAvailable": {
+          "name": "isAvailable",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "productVariants_productID_products_ID_fk": {
+          "name": "productVariants_productID_products_ID_fk",
+          "tableFrom": "productVariants",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "productVariants_variantID_variants_ID_fk": {
+          "name": "productVariants_variantID_variants_ID_fk",
+          "tableFrom": "productVariants",
+          "tableTo": "variants",
+          "columnsFrom": [
+            "variantID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "productVariants_productID_variantID_pk": {
+          "columns": [
+            "productID",
+            "variantID"
+          ],
+          "name": "productVariants_productID_variantID_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "products": {
+      "name": "products",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "locales": {
+      "name": "locales",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "variantsContent": {
+      "name": "variantsContent",
+      "columns": {
+        "variantID": {
+          "name": "variantID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "variantsContent_variantID_variants_ID_fk": {
+          "name": "variantsContent_variantID_variants_ID_fk",
+          "tableFrom": "variantsContent",
+          "tableTo": "variants",
+          "columnsFrom": [
+            "variantID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "variantsContent_locale_locales_ID_fk": {
+          "name": "variantsContent_locale_locales_ID_fk",
+          "tableFrom": "variantsContent",
+          "tableTo": "locales",
+          "columnsFrom": [
+            "locale"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "variantsContent_variantID_locale_pk": {
+          "columns": [
+            "locale",
+            "variantID"
+          ],
+          "name": "variantsContent_variantID_locale_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "variants": {
+      "name": "variants",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "storageUnits": {
+      "name": "storageUnits",
+      "columns": {
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "variantID": {
+          "name": "variantID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "warehouseID": {
+          "name": "warehouseID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "storageUnits_productID_products_ID_fk": {
+          "name": "storageUnits_productID_products_ID_fk",
+          "tableFrom": "storageUnits",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "storageUnits_variantID_variants_ID_fk": {
+          "name": "storageUnits_variantID_variants_ID_fk",
+          "tableFrom": "storageUnits",
+          "tableTo": "variants",
+          "columnsFrom": [
+            "variantID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "storageUnits_warehouseID_warehouses_ID_fk": {
+          "name": "storageUnits_warehouseID_warehouses_ID_fk",
+          "tableFrom": "storageUnits",
+          "tableTo": "warehouses",
+          "columnsFrom": [
+            "warehouseID"
+          ],
+          "columnsTo": [
+            "ID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "storageUnits_productID_variantID_warehouseID_pk": {
+          "columns": [
+            "productID",
+            "variantID",
+            "warehouseID"
+          ],
+          "name": "storageUnits_productID_variantID_warehouseID_pk"
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "warehouses": {
+      "name": "warehouses",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'{}'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {
+      "\"productVariants\".\"available\"": "\"productVariants\".\"isAvailable\""
+    }
+  }
+}
