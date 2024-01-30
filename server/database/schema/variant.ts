@@ -48,7 +48,7 @@ export const variantsRelations = relations(variants, ({ many }) => ({
   storageUnits: many(storageUnits),
 }));
 
-export const variantsContentsRelations = relations(
+export const variantContentsRelations = relations(
   variantContents,
   ({ one }) => ({
     variant: one(variants, {
