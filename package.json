@@ -30,6 +30,7 @@
     "@nuxt/ui": "^2.12.0",
     "better-sqlite3": "^9.2.2",
     "drizzle-orm": "^0.29.3",
+    "drizzle-zod": "^0.5.1",
     "lucia": "^3.0.1",
     "oslo": "^1.0.3",
     "zod": "^3.22.4"
