@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1706122399344,
-      "tag": "0000_aspiring_lady_vermin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1706122436448,
-      "tag": "0001_flowery_energizer",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1706220505478,
-      "tag": "0002_condemned_iron_monger",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1706221124328,
-      "tag": "0003_wooden_luckman",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1706434386677,
-      "tag": "0004_fluffy_jack_flag",
+      "when": 1706633804916,
+      "tag": "0000_deep_dagger",
       "breakpoints": true
     }
   ]

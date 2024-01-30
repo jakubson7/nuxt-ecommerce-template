@@ -14,7 +14,7 @@ import { categories } from "./category";
 
 export const products = sqliteTable("products", {
   ID: integer("ID").primaryKey(),
-  slug: text("slug").notNull(),
+  universalSlug: text("universalSlug").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
     .notNull()
@@ -34,6 +34,7 @@ export const productContents = sqliteTable(
       .$type<Locale>()
       .notNull()
       .references(() => locales.ID),
+    slug: text("slug").notNull(),
     name: text("name").notNull(),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
