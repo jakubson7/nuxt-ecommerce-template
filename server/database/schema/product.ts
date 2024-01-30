@@ -71,9 +71,10 @@ export const productCategories = sqliteTable("productCategories", {
 
 export const productsRelations = relations(products, ({ many }) => ({
   prices: many(prices),
-  contents: many(productContents),
-  variants: many(productVariants),
+  productContents: many(productContents),
+  productVariants: many(productVariants),
   storageUnits: many(storageUnits),
+  productCategories: many(productCategories),
 }));
 
 export const productContentsRelations = relations(
@@ -100,6 +101,20 @@ export const productVariantsRelations = relations(
     variant: one(variants, {
       fields: [productVariants.variantID],
       references: [variants.ID],
+    }),
+  })
+);
+
+export const productCategoriesRelations = relations(
+  productCategories,
+  ({ one }) => ({
+    product: one(products, {
+      fields: [productCategories.productID],
+      references: [products.ID],
+    }),
+    category: one(categories, {
+      fields: [productCategories.categoryID],
+      references: [categories.ID],
     }),
   })
 );

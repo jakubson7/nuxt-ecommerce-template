@@ -2,6 +2,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { Locale } from "~/i18n/config";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
+import { productCategories } from "./product";
 
 export const categories = sqliteTable("categories", {
   ID: integer("ID").primaryKey(),
@@ -32,6 +33,7 @@ export const categoryContents = sqliteTable("categoryContents", {
 
 export const categoriesRelations = relations(categories, ({ many }) => ({
   contents: many(categoryContents),
+  productCategories: many(productCategories),
 }));
 
 export const categoryContentsRelations = relations(
