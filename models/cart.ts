@@ -1,5 +1,4 @@
-import { carts } from "../schema";
-import { ProductChoice } from "./product";
+import { carts } from "~/server/database/schema";
 
 export type SelectCart = typeof carts.$inferSelect;
 export type InsertCart = typeof carts.$inferInsert;

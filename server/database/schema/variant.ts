@@ -7,7 +7,7 @@ import {
 import { Locale } from "~/i18n/config";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
-import { ProductVariantType } from "../models/variant";
+import { ProductVariantType } from "~/models/variant";
 import { productVariants } from "./product";
 import { storageUnits } from "./storage";
 

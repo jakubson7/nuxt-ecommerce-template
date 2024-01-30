@@ -1,4 +1,4 @@
-import { categories, categoryContents } from "../schema";
+import { categories, categoryContents } from "~/server/database/schema";
 
 export type SelectCategory = typeof categories.$inferSelect;
 export type InsertCategory = typeof categories.$inferInsert;

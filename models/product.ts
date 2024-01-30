@@ -1,15 +1,14 @@
 import {
   productContents,
-  prices,
   productVariants,
   products,
   productCategories,
-} from "../schema";
-import { Category } from "./category";
-import { Offer } from "./offer";
-import { Price } from "./price";
-import { StorageUnit } from "./storage";
-import { Variant } from "./variant";
+} from "~/server/database/schema";
+import type { Variant } from "./variant";
+import type { Price } from "./price";
+import type { Offer } from "./offer";
+import type { StorageUnit } from "./storage";
+import type { Category } from "./category";
 
 export type SelectProduct = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;

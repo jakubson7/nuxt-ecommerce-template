@@ -1,4 +1,4 @@
-import { storageUnits, warehouses } from "../schema";
+import { storageUnits, warehouses } from "~/server/database/schema";
 
 export type SelectWarehouse = typeof warehouses.$inferSelect;
 export type InsertWarehouse = typeof warehouses.$inferInsert;

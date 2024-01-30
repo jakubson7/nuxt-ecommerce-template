@@ -1,5 +1,5 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { InsertProductChoice } from "../models";
+import { InsertProductChoice } from "~/models/product";
 
 export const carts = sqliteTable("carts", {
   ID: integer("ID").primaryKey(),

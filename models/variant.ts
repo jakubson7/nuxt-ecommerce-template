@@ -1,4 +1,4 @@
-import { variantContents, variants } from "../schema";
+import { variantContents, variants } from "~/server/database/schema";
 
 export type ProductVariantType = "color" | "size";
 
