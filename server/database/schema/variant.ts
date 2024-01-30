@@ -9,7 +9,7 @@ import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 import { ProductVariantType } from "../models/variant";
 import { productVariants } from "./product";
-import { productStorageUnits } from "./storage";
+import { storageUnits } from "./storage";
 
 export const variants = sqliteTable("variants", {
   ID: integer("ID").primaryKey(),
@@ -30,28 +30,22 @@ export const variantContents = sqliteTable(
     variantID: integer("variantID")
       .notNull()
       .references(() => variants.ID),
-    locale: text("locale")
+    localeID: text("locale")
       .$type<Locale>()
       .notNull()
       .references(() => locales.ID),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
-    createdAt: integer("createdAt", { mode: "timestamp_ms" })
-      .notNull()
-      .$defaultFn(() => new Date()),
-    updatedAt: integer("updatedAt", { mode: "timestamp_ms" })
-      .notNull()
-      .$defaultFn(() => new Date()),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.variantID, table.locale] }),
+    pk: primaryKey({ columns: [table.variantID, table.localeID] }),
   })
 );
 
 export const variantsRelations = relations(variants, ({ many }) => ({
   contents: many(variantContents),
   productVariants: many(productVariants),
-  storageUnits: many(productStorageUnits),
+  storageUnits: many(storageUnits),
 }));
 
 export const variantsContentsRelations = relations(
@@ -60,6 +54,10 @@ export const variantsContentsRelations = relations(
     variant: one(variants, {
       fields: [variantContents.variantID],
       references: [variants.ID],
+    }),
+    locale: one(locales, {
+      fields: [variantContents.localeID],
+      references: [locales.ID],
     }),
   })
 );
