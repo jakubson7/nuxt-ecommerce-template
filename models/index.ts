@@ -6,3 +6,4 @@ export * from "./price";
 export * from "./product";
 export * from "./storage";
 export * from "./variant";
+export * from "./auth";

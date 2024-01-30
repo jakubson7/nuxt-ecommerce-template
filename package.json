@@ -26,9 +26,12 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@lucia-auth/adapter-drizzle": "^1.0.0",
     "@nuxt/ui": "^2.12.0",
     "better-sqlite3": "^9.2.2",
     "drizzle-orm": "^0.29.3",
+    "lucia": "^3.0.1",
+    "oslo": "^1.0.3",
     "zod": "^3.22.4"
   }
 }

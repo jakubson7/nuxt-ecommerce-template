@@ -23,12 +23,6 @@ export const categoryContents = sqliteTable("categoryContents", {
     .references(() => locales.ID),
   name: text("name").notNull(),
   metadata: text("metadata").notNull().default("{}"),
-  createdAt: integer("createdAt", { mode: "timestamp_ms" })
-    .notNull()
-    .$defaultFn(() => new Date()),
-  updatedAt: integer("updatedAt", { mode: "timestamp_ms" })
-    .notNull()
-    .$defaultFn(() => new Date()),
 });
 
 export const categoriesRelations = relations(categories, ({ many }) => ({

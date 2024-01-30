@@ -5,4 +5,4 @@ export type InsertCategory = typeof categories.$inferInsert;
 export type SelectCategoryContent = typeof categoryContents.$inferSelect;
 export type InsertCategorycontent = typeof categoryContents.$inferInsert;
 
-export type Category = SelectCategory;
+export type Category = SelectCategory & { content: SelectCategoryContent };
