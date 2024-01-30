@@ -22,7 +22,7 @@ export const products = sqliteTable("products", {
     .$defaultFn(() => new Date()),
 });
 
-export const productPrices = sqliteTable("productPrices", {
+export const prices = sqliteTable("prices", {
   ID: integer("ID").primaryKey(),
   productID: integer("productID")
     .notNull()
@@ -91,15 +91,15 @@ export const productVariants = sqliteTable(
 );
 
 export const productsRelations = relations(products, ({ many }) => ({
-  prices: many(productPrices),
+  prices: many(prices),
   contents: many(productContents),
   variants: many(productVariants),
   storageUnits: many(storageUnits),
 }));
 
-export const productPricesRelations = relations(productPrices, ({ one }) => ({
+export const productPricesRelations = relations(prices, ({ one }) => ({
   product: one(products, {
-    fields: [productPrices.productID],
+    fields: [prices.productID],
     references: [products.ID],
   }),
 }));

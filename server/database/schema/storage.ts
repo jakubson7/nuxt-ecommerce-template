@@ -33,7 +33,7 @@ export const storageUnits = sqliteTable(
     warehouseID: integer("warehouseID")
       .notNull()
       .references(() => warehouses.ID),
-    amount: integer("amount"),
+    amount: integer("amount").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
     createdAt: integer("createdAt", { mode: "timestamp_ms" })
       .notNull()
