@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const multiple = ref(1);
 const a = ref(1);
+const user = useUser();
+onMounted(() => {
+  console.log(toValue(user));
+});
 </script>
 
 <template>

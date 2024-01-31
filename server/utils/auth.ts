@@ -1,6 +1,7 @@
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { userSessions, users } from "../database/schema";
 import { Lucia } from "lucia";
+import { UserRole } from "~/models";
 
 const luciaDrizzleSqliteAdapter = new DrizzleSQLiteAdapter(
   // @ts-ignore
@@ -17,6 +18,8 @@ export const lucia = new Lucia(luciaDrizzleSqliteAdapter, {
   getUserAttributes(databaseUserAttributes) {
     return {
       name: databaseUserAttributes.name,
+      email: databaseUserAttributes.email,
+      role: databaseUserAttributes.role,
     };
   },
 });
@@ -30,4 +33,6 @@ declare module "lucia" {
 
 interface DatabaseUserAttributes {
   name: string;
+  email: string;
+  role: UserRole;
 }

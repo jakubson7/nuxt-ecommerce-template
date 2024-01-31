@@ -13,12 +13,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const hashedPassword = await new Argon2id().hash(body.password);
-  const ID = generateId(16);
+  const id = generateId(16);
 
   const user = await database()
     .insert(users)
     .values({
-      ID,
+      id,
       hashedPassword,
       name: body.name,
       email: "test@gmail.com",
@@ -26,5 +26,11 @@ export default defineEventHandler(async (event) => {
     })
     .returning();
 
+  const session = await lucia.createSession(id, {});
+  appendHeader(
+    event,
+    "Set-Cookie",
+    lucia.createSessionCookie(session.id).serialize()
+  );
   return user[0];
 });
