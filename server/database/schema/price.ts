@@ -5,14 +5,14 @@ import { products } from "./product";
 import { relations } from "drizzle-orm";
 
 export const prices = sqliteTable("prices", {
-  ID: integer("ID").primaryKey(),
-  productID: integer("productID")
+  id: integer("id").primaryKey(),
+  productId: integer("productId")
     .notNull()
-    .references(() => products.ID),
-  localeID: text("locale")
+    .references(() => products.id),
+  localeId: text("localeId")
     .$type<Locale>()
     .notNull()
-    .references(() => locales.ID),
+    .references(() => locales.id),
   currency: text("currency").$type<Currency>().notNull(),
   value: integer("value").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
@@ -26,11 +26,11 @@ export const prices = sqliteTable("prices", {
 
 export const pricesRelations = relations(prices, ({ one }) => ({
   product: one(products, {
-    fields: [prices.productID],
-    references: [products.ID],
+    fields: [prices.productId],
+    references: [products.id],
   }),
   locale: one(locales, {
-    fields: [prices.localeID],
-    references: [locales.ID],
+    fields: [prices.localeId],
+    references: [locales.id],
   }),
 }));

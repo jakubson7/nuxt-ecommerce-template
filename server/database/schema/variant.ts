@@ -12,7 +12,7 @@ import { productVariants } from "./product";
 import { storageUnits } from "./storage";
 
 export const variants = sqliteTable("variants", {
-  ID: integer("ID").primaryKey(),
+  id: integer("id").primaryKey(),
   value: text("value").notNull(),
   type: text("type").notNull().$type<ProductVariantType>(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
@@ -27,18 +27,18 @@ export const variants = sqliteTable("variants", {
 export const variantContents = sqliteTable(
   "variantsContent",
   {
-    variantID: integer("variantID")
+    variantId: integer("variantId")
       .notNull()
-      .references(() => variants.ID),
-    localeID: text("locale")
+      .references(() => variants.id),
+    localeId: text("localeId")
       .$type<Locale>()
       .notNull()
-      .references(() => locales.ID),
+      .references(() => locales.id),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.variantID, table.localeID] }),
+    pk: primaryKey({ columns: [table.variantId, table.localeId] }),
   })
 );
 
@@ -52,12 +52,12 @@ export const variantContentsRelations = relations(
   variantContents,
   ({ one }) => ({
     variant: one(variants, {
-      fields: [variantContents.variantID],
-      references: [variants.ID],
+      fields: [variantContents.variantId],
+      references: [variants.id],
     }),
     locale: one(locales, {
-      fields: [variantContents.localeID],
-      references: [locales.ID],
+      fields: [variantContents.localeId],
+      references: [locales.id],
     }),
   })
 );

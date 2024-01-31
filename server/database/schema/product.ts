@@ -4,7 +4,7 @@ import {
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
-import { Locale, Currency } from "~/i18n/config";
+import { Locale } from "~/i18n/config";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 import { variants } from "./variant";
@@ -13,7 +13,7 @@ import { prices } from "./price";
 import { categories } from "./category";
 
 export const products = sqliteTable("products", {
-  ID: integer("ID").primaryKey(),
+  id: integer("id").primaryKey(),
   universalSlug: text("universalSlug").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
@@ -27,46 +27,46 @@ export const products = sqliteTable("products", {
 export const productContents = sqliteTable(
   "productContents",
   {
-    productID: integer("productID")
+    productId: integer("productId")
       .notNull()
-      .references(() => products.ID),
-    localeID: text("locale")
+      .references(() => products.id),
+    localeId: text("localeId")
       .$type<Locale>()
       .notNull()
-      .references(() => locales.ID),
+      .references(() => locales.id),
     slug: text("slug").notNull(),
     name: text("name").notNull(),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.productID, table.localeID] }),
+    pk: primaryKey({ columns: [table.productId, table.localeId] }),
   })
 );
 
 export const productVariants = sqliteTable(
   "productVariants",
   {
-    productID: integer("productID")
+    productId: integer("productId")
       .notNull()
-      .references(() => products.ID),
-    variantID: integer("variantID")
+      .references(() => products.id),
+    variantId: integer("variantId")
       .notNull()
-      .references(() => variants.ID),
+      .references(() => variants.id),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.productID, table.variantID] }),
+    pk: primaryKey({ columns: [table.productId, table.variantId] }),
   })
 );
 
 export const productCategories = sqliteTable("productCategories", {
-  productID: integer("productID")
+  productId: integer("productId")
     .notNull()
-    .references(() => products.ID),
-  categoryID: integer("categoryID")
+    .references(() => products.id),
+  categoryId: integer("categoryId")
     .notNull()
-    .references(() => categories.ID),
+    .references(() => categories.id),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
 });
 
@@ -82,27 +82,28 @@ export const productContentsRelations = relations(
   productContents,
   ({ one }) => ({
     product: one(products, {
-      fields: [productContents.productID],
-      references: [products.ID],
+      fields: [productContents.productId],
+      references: [products.id],
     }),
     locale: one(locales, {
-      fields: [productContents.localeID],
-      references: [locales.ID],
+      fields: [productContents.localeId],
+      references: [locales.id],
     }),
   })
 );
 
 export const productVariantsRelations = relations(
   productVariants,
-  ({ one }) => ({
+  ({ one, many }) => ({
     product: one(products, {
-      fields: [productVariants.productID],
-      references: [products.ID],
+      fields: [productVariants.productId],
+      references: [products.id],
     }),
     variant: one(variants, {
-      fields: [productVariants.variantID],
-      references: [variants.ID],
+      fields: [productVariants.variantId],
+      references: [variants.id],
     }),
+    storageUnits: many(storageUnits),
   })
 );
 
@@ -110,12 +111,12 @@ export const productCategoriesRelations = relations(
   productCategories,
   ({ one }) => ({
     product: one(products, {
-      fields: [productCategories.productID],
-      references: [products.ID],
+      fields: [productCategories.productId],
+      references: [products.id],
     }),
     category: one(categories, {
-      fields: [productCategories.categoryID],
-      references: [categories.ID],
+      fields: [productCategories.categoryId],
+      references: [categories.id],
     }),
   })
 );

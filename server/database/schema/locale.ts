@@ -8,7 +8,7 @@ import { prices } from "./price";
 import { offerContents } from "./offer";
 
 export const locales = sqliteTable("locales", {
-  ID: text("ID").$type<Locale>().primaryKey(),
+  id: text("id").$type<Locale>().primaryKey(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
     .notNull()

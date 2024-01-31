@@ -9,7 +9,7 @@ import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 
 export const offers = sqliteTable("offers", {
-  ID: integer("offers").primaryKey(),
+  id: integer("id").primaryKey(),
   scheme: text("scheme", { mode: "json" }).notNull().default("{}"),
   productsAffected: text("productsAffected", { mode: "json" })
     .notNull()
@@ -28,19 +28,19 @@ export const offers = sqliteTable("offers", {
 export const offerContents = sqliteTable(
   "offerContents",
   {
-    offerID: integer("offerID")
+    offerId: integer("offerId")
       .notNull()
-      .references(() => offers.ID),
-    localeID: text("localeID")
+      .references(() => offers.id),
+    localeId: text("localeId")
       .notNull()
       .$type<Locale>()
-      .references(() => locales.ID),
+      .references(() => locales.id),
     name: text("name").notNull(),
     description: text("description").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   },
   (table) => ({
-    pk: primaryKey({ columns: [table.offerID, table.localeID] }),
+    pk: primaryKey({ columns: [table.offerId, table.localeId] }),
   })
 );
 
@@ -50,11 +50,11 @@ export const offersRelations = relations(offers, ({ many }) => ({
 
 export const offerContentsRelations = relations(offerContents, ({ one }) => ({
   offer: one(offers, {
-    fields: [offerContents.offerID],
-    references: [offers.ID],
+    fields: [offerContents.offerId],
+    references: [offers.id],
   }),
   locale: one(locales, {
-    fields: [offerContents.localeID],
-    references: [locales.ID],
+    fields: [offerContents.localeId],
+    references: [locales.id],
   }),
 }));

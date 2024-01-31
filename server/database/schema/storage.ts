@@ -4,12 +4,12 @@ import {
   text,
   primaryKey,
 } from "drizzle-orm/sqlite-core";
-import { products } from "./product";
+import { productVariants, products } from "./product";
 import { variants } from "./variant";
 import { relations } from "drizzle-orm";
 
 export const warehouses = sqliteTable("warehouses", {
-  ID: integer("ID").primaryKey(),
+  id: integer("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
@@ -24,15 +24,15 @@ export const warehouses = sqliteTable("warehouses", {
 export const storageUnits = sqliteTable(
   "storageUnits",
   {
-    productID: integer("productID")
+    productId: integer("productId")
       .notNull()
-      .references(() => products.ID),
-    variantID: integer("variantID")
+      .references(() => products.id),
+    variantId: integer("variantId")
       .notNull()
-      .references(() => variants.ID),
-    warehouseID: integer("warehouseID")
+      .references(() => variants.id),
+    warehouseId: integer("warehouseId")
       .notNull()
-      .references(() => warehouses.ID),
+      .references(() => warehouses.id),
     amount: integer("amount").notNull(),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
     createdAt: integer("createdAt", { mode: "timestamp_ms" })
@@ -44,7 +44,7 @@ export const storageUnits = sqliteTable(
   },
   (table) => ({
     pk: primaryKey({
-      columns: [table.productID, table.variantID, table.warehouseID],
+      columns: [table.productId, table.variantId, table.warehouseId],
     }),
   })
 );
@@ -55,15 +55,19 @@ export const warehousesRelations = relations(warehouses, ({ many }) => ({
 
 export const storageUnitsRelations = relations(storageUnits, ({ one }) => ({
   product: one(products, {
-    fields: [storageUnits.productID],
-    references: [products.ID],
+    fields: [storageUnits.productId],
+    references: [products.id],
   }),
   variant: one(variants, {
-    fields: [storageUnits.variantID],
-    references: [variants.ID],
+    fields: [storageUnits.variantId],
+    references: [variants.id],
   }),
   warehouse: one(warehouses, {
-    fields: [storageUnits.warehouseID],
-    references: [warehouses.ID],
+    fields: [storageUnits.warehouseId],
+    references: [warehouses.id],
+  }),
+  productVariant: one(productVariants, {
+    fields: [storageUnits.productId, storageUnits.variantId],
+    references: [productVariants.productId, productVariants.variantId],
   }),
 }));
