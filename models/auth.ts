@@ -4,14 +4,7 @@ import { z } from "zod";
 
 export type UserRole = "admin";
 
-export type SelectUser = typeof users.$inferSelect;
-export type InsertUser = typeof users.$inferInsert;
-export type SelectUserSession = typeof userSessions.$inferSelect;
-export type InsertUserSession = typeof userSessions.$inferInsert;
-
-export type User = SelectUser;
-export type UserSession = SelectUserSession;
-
-export const insertUserSchema = createInsertSchema(users, {
-  email: z.string().email(),
-});
+export type DBSelectUser = typeof users.$inferSelect;
+export type DBInsertUser = typeof users.$inferInsert;
+export type DBSelectUserSession = typeof userSessions.$inferSelect;
+export type DBInsertUserSession = typeof userSessions.$inferInsert;

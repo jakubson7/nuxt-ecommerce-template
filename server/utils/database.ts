@@ -1,4 +1,4 @@
-import * as schema from "../schema";
+import * as schema from "../database/schema";
 import {
   drizzle as betterSqlite3Drizzle,
   BetterSQLite3Database,

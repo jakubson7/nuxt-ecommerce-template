@@ -15,6 +15,13 @@
       "when": 1706644585989,
       "tag": "0001_busy_silver_surfer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706703895102,
+      "tag": "0002_swift_thaddeus_ross",
+      "breakpoints": true
     }
   ]
 }
