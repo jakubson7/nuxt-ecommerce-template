@@ -9,6 +9,7 @@ import { relations } from "drizzle-orm";
 import { VariantType } from "~/utils/models/variant";
 import { productVariants } from "./product";
 import { storageUnits } from "./storage";
+import { Locale } from "~/utils/models";
 
 export const variants = sqliteTable("variants", {
   id: integer("id").primaryKey(),

@@ -1,11 +1,11 @@
 import { relations } from "drizzle-orm";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { Locale } from "~/i18n/config";
 import { productContents } from "./product";
 import { categoryContents } from "./category";
 import { variantContents } from "./variant";
 import { prices } from "./price";
 import { offerContents } from "./offer";
+import { Locale } from "~/utils/models";
 
 export const locales = sqliteTable("locales", {
   id: text("id").$type<Locale>().primaryKey(),

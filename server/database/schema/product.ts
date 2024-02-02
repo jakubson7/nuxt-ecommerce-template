@@ -4,7 +4,7 @@ import {
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
-import { Locale } from "~/i18n/config";
+import { Locale } from "~/utils/models";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 import { variants } from "./variant";
