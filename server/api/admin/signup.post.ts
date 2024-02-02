@@ -4,17 +4,17 @@ import { users } from "~/server/database/schema";
 import { userSignupSchema } from "~/models";
 
 export default defineEventHandler(async (event) => {
-  const result = await readValidatedBody(event, (body) =>
+  const body = await readValidatedBody(event, (body) =>
     userSignupSchema.safeParse(body)
   );
 
-  if (!result.success)
+  if (!body.success)
     throw createError({
       statusCode: 422,
-      message: JSON.stringify(result.error.flatten()),
+      message: JSON.stringify(body.error.flatten()),
     });
 
-  const { password, name, email, role } = result.data;
+  const { password, name, email, role } = body.data;
   const hashedPassword = await new Argon2id().hash(password);
   const id = generateId(16);
 

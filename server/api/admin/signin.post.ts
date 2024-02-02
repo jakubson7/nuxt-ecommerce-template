@@ -3,17 +3,17 @@ import { Argon2id } from "oslo/password";
 
 export default defineEventHandler(async (event) => {
   const t = await useTranslation(event);
-  const result = await readValidatedBody(event, (body) =>
+  const body = await readValidatedBody(event, (body) =>
     userSigninSchema.safeParse(body)
   );
 
-  if (!result.success)
+  if (!body.success)
     throw createError({
       statusCode: 403,
-      message: JSON.stringify(result.error.flatten()),
+      message: JSON.stringify(body.error.flatten()),
     });
 
-  const { email, password } = result.data;
+  const { email, password } = body.data;
 
   const user = await database().query.users.findFirst({
     where: (users, { eq }) => eq(users.email, email),

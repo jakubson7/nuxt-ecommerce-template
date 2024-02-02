@@ -23,6 +23,8 @@ export const createVariantSchema = z.object({
   contents: z.array(variantContentSchema),
 });
 
+export const patchVariantSchema = createVariantSchema.partial();
+
 export const variantSchema = createVariantSchema
   .extend(idSchema.shape)
   .extend(timestampSchema.shape);
@@ -34,5 +36,6 @@ export const localVariantSchema = createVariantSchema
   .extend({ content: variantContentSchema });
 
 export type CreateVariant = z.infer<typeof createVariantSchema>;
+export type PatchVariant = z.infer<typeof patchVariantSchema>;
 export type Variant = z.infer<typeof variantSchema>;
 export type Localvariant = z.infer<typeof localVariantSchema>;
