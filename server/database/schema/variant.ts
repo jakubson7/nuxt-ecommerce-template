@@ -4,17 +4,16 @@ import {
   sqliteTable,
   text,
 } from "drizzle-orm/sqlite-core";
-import { Locale } from "~/i18n/config";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
-import { ProductVariantType } from "~/models/variant";
+import { VariantType } from "~/utils/models/variant";
 import { productVariants } from "./product";
 import { storageUnits } from "./storage";
 
 export const variants = sqliteTable("variants", {
   id: integer("id").primaryKey(),
   value: text("value").notNull(),
-  type: text("type").notNull().$type<ProductVariantType>(),
+  type: text("type").notNull().$type<VariantType>(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
     .notNull()

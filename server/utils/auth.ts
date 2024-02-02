@@ -1,7 +1,7 @@
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { userSessions, users } from "../database/schema";
 import { Lucia } from "lucia";
-import { UserRole } from "~/models";
+import { UserRole } from "~/utils/models";
 
 const luciaDrizzleSqliteAdapter = new DrizzleSQLiteAdapter(
   // @ts-ignore

@@ -17,5 +17,8 @@ export default defineNuxtConfig({
       useCookie: true,
       redirectOn: "root",
     },
+    experimental: {
+      localeDetector: "./i18n/localeDetector",
+    },
   },
 });
