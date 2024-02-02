@@ -22,7 +22,7 @@ export const categoryContents = sqliteTable("categoryContents", {
     .$type<Locale>()
     .references(() => locales.id),
   name: text("name").notNull(),
-  metadata: text("metadata").notNull().default("{}"),
+  metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
 });
 
 export const categoriesRelations = relations(categories, ({ many }) => ({

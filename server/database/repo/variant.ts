@@ -4,11 +4,11 @@ import { variantContents, variants } from "../schema";
 export default class VariantRepo {
   private db = database();
 
-  async insertVariant(createVariant: CreateVariant): Promise<Variant | null> {
+  async insertVariant(createVariant: CreateVariant): Promise<Variant> {
     return this.db.transaction(async (tx) => {
       const variantId = genId();
 
-      const DbVariants = await tx
+      const DbVariant = await tx
         .insert(variants)
         .values({
           id: variantId,
@@ -31,7 +31,7 @@ export default class VariantRepo {
         .returning();
 
       return {
-        ...DbVariants[0],
+        ...DbVariant[0],
         contents: DbContents.map((c) => ({
           localeId: c.localeId,
           description: c.description,
