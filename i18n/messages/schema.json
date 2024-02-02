@@ -2,15 +2,24 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "test": {
+    "error": {
       "type": "object",
       "properties": {
-        "welcome": {
-          "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "emailNotFound": { "type": "string" },
+            "incorrectEmailOrPassword": { "type": "string" }
+          },
+          "required": ["emailNotFound", "incorrectEmailOrPassword"]
+        },
+        "validation": {
+          "type": "object",
+          "properties": {}
         }
       },
-      "required": ["welcome"]
+      "required": ["data", "validation"]
     }
   },
-  "required": ["test"]
+  "required": ["error"]
 }

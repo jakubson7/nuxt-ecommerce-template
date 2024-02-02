@@ -1,6 +1,10 @@
 {
   "$schema": "./schema.json",
-  "test": {
-    "welcome": "Hello"
+  "error": {
+    "data": {
+      "emailNotFound": "Email not found",
+      "incorrectEmailOrPassword": "Incorrect email or password"
+    },
+    "validation": {}
   }
 }

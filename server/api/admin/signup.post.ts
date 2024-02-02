@@ -1,18 +1,21 @@
 import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
 import { users } from "~/server/database/schema";
+import { userSignupSchema } from "~/utils/models";
 
 export default defineEventHandler(async (event) => {
-  const body: { name?: string; password?: string } = await readBody(event);
+  const result = await readValidatedBody(event, (body) =>
+    userSignupSchema.safeParse(body)
+  );
 
-  if (!body.name || !body.password) {
+  if (!result.success)
     throw createError({
       statusCode: 422,
-      statusMessage: "name or password wrong!",
+      message: JSON.stringify(result.error.flatten()),
     });
-  }
 
-  const hashedPassword = await new Argon2id().hash(body.password);
+  const { password, name, email, role } = result.data;
+  const hashedPassword = await new Argon2id().hash(password);
   const id = generateId(16);
 
   const user = await database()
@@ -20,9 +23,9 @@ export default defineEventHandler(async (event) => {
     .values({
       id,
       hashedPassword,
-      name: body.name,
-      email: "test@gmail.com",
-      role: "admin",
+      name,
+      email,
+      role,
     })
     .returning();
 
