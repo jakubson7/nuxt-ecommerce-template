@@ -9,12 +9,9 @@ export const variantTypeSchema = z.union([
 export type VariantType = z.infer<typeof variantTypeSchema>;
 
 export const createVariantSchema = z.object({
-  id: z.string().length(32),
   text: z.string().max(128),
   type: variantTypeSchema,
   metadata: z.string(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
   contents: z.record(
     localeSchema,
     z.object({
@@ -24,4 +21,24 @@ export const createVariantSchema = z.object({
   ),
 });
 
-export type CreateVariantSchema = z.infer<typeof createVariantSchema>;
+export const variantSchema = createVariantSchema.extend({
+  id: z.string().length(32),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const localVariantSchema = createVariantSchema
+  .extend({
+    id: z.string().length(32),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+    content: z.object({
+      description: z.string().max(512),
+      metadata: z.string(),
+    }),
+  })
+  .omit({ contents: true });
+
+export type CreateVariant = z.infer<typeof createVariantSchema>;
+export type Variant = z.infer<typeof variantSchema>;
+export type Localvariant = z.infer<typeof localVariantSchema>;

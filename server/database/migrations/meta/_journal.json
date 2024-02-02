@@ -15,6 +15,13 @@
       "when": 1706867907037,
       "tag": "0001_bouncy_garia",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706874128729,
+      "tag": "0002_busy_angel",
+      "breakpoints": true
     }
   ]
 }
