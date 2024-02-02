@@ -12,8 +12,8 @@ import { storageUnits } from "./storage";
 import { Locale } from "~/utils/models";
 
 export const variants = sqliteTable("variants", {
-  id: integer("id").primaryKey(),
-  value: text("value").notNull(),
+  id: text("id").primaryKey(),
+  text: text("text").notNull(),
   type: text("type").notNull().$type<VariantType>(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
@@ -27,7 +27,7 @@ export const variants = sqliteTable("variants", {
 export const variantContents = sqliteTable(
   "variantsContent",
   {
-    variantId: integer("variantId")
+    variantId: text("variantId")
       .notNull()
       .references(() => variants.id),
     localeId: text("localeId")

@@ -5,8 +5,8 @@ import { products } from "./product";
 import { relations } from "drizzle-orm";
 
 export const prices = sqliteTable("prices", {
-  id: integer("id").primaryKey(),
-  productId: integer("productId")
+  id: text("id").primaryKey(),
+  productId: text("productId")
     .notNull()
     .references(() => products.id),
   localeId: text("localeId")

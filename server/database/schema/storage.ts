@@ -9,7 +9,7 @@ import { variants } from "./variant";
 import { relations } from "drizzle-orm";
 
 export const warehouses = sqliteTable("warehouses", {
-  id: integer("id").primaryKey(),
+  id: text("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
@@ -24,13 +24,13 @@ export const warehouses = sqliteTable("warehouses", {
 export const storageUnits = sqliteTable(
   "storageUnits",
   {
-    productId: integer("productId")
+    productId: text("productId")
       .notNull()
       .references(() => products.id),
-    variantId: integer("variantId")
+    variantId: text("variantId")
       .notNull()
       .references(() => variants.id),
-    warehouseId: integer("warehouseId")
+    warehouseId: text("warehouseId")
       .notNull()
       .references(() => warehouses.id),
     amount: integer("amount").notNull(),

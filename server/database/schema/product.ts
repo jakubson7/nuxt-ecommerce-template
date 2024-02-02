@@ -13,7 +13,7 @@ import { prices } from "./price";
 import { categories } from "./category";
 
 export const products = sqliteTable("products", {
-  id: integer("id").primaryKey(),
+  id: text("id").primaryKey(),
   universalSlug: text("universalSlug").notNull(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
@@ -27,7 +27,7 @@ export const products = sqliteTable("products", {
 export const productContents = sqliteTable(
   "productContents",
   {
-    productId: integer("productId")
+    productId: text("productId")
       .notNull()
       .references(() => products.id),
     localeId: text("localeId")
@@ -47,10 +47,10 @@ export const productContents = sqliteTable(
 export const productVariants = sqliteTable(
   "productVariants",
   {
-    productId: integer("productId")
+    productId: text("productId")
       .notNull()
       .references(() => products.id),
-    variantId: integer("variantId")
+    variantId: text("variantId")
       .notNull()
       .references(() => variants.id),
     metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
@@ -61,10 +61,10 @@ export const productVariants = sqliteTable(
 );
 
 export const productCategories = sqliteTable("productCategories", {
-  productId: integer("productId")
+  productId: text("productId")
     .notNull()
     .references(() => products.id),
-  categoryId: integer("categoryId")
+  categoryId: text("categoryId")
     .notNull()
     .references(() => categories.id),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),

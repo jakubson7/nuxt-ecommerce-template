@@ -5,7 +5,7 @@ import { relations } from "drizzle-orm";
 import { productCategories } from "./product";
 
 export const categories = sqliteTable("categories", {
-  id: integer("id").primaryKey(),
+  id: text("id").primaryKey(),
   metadata: text("metadata", { mode: "json" }).notNull().default("{}"),
   createdAt: integer("createdAt", { mode: "timestamp_ms" })
     .notNull()
@@ -16,7 +16,7 @@ export const categories = sqliteTable("categories", {
 });
 
 export const categoryContents = sqliteTable("categoryContents", {
-  categoryId: integer("categoryId").notNull(),
+  categoryId: text("categoryId").notNull(),
   localeId: text("localeId")
     .notNull()
     .$type<Locale>()

@@ -9,7 +9,7 @@ import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 
 export const offers = sqliteTable("offers", {
-  id: integer("id").primaryKey(),
+  id: text("id").primaryKey(),
   scheme: text("scheme", { mode: "json" }).notNull().default("{}"),
   productsAffected: text("productsAffected", { mode: "json" })
     .notNull()
@@ -28,7 +28,7 @@ export const offers = sqliteTable("offers", {
 export const offerContents = sqliteTable(
   "offerContents",
   {
-    offerId: integer("offerId")
+    offerId: text("offerId")
       .notNull()
       .references(() => offers.id),
     localeId: text("localeId")
