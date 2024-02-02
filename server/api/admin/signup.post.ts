@@ -1,7 +1,7 @@
 import { Argon2id } from "oslo/password";
 import { generateId } from "lucia";
 import { users } from "~/server/database/schema";
-import { userSignupSchema } from "~/utils/models";
+import { userSignupSchema } from "~/models";
 
 export default defineEventHandler(async (event) => {
   const result = await readValidatedBody(event, (body) =>

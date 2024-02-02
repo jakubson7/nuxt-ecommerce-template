@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { localeSchema } from "./i18n";
+import { idSchema } from "./id";
+import { timestampSchema } from "./timestamp";
 
 export const variantTypeSchema = z.union([
   z.literal("color"),
@@ -8,36 +10,28 @@ export const variantTypeSchema = z.union([
 
 export type VariantType = z.infer<typeof variantTypeSchema>;
 
+export const variantContentSchema = z.object({
+  localeId: localeSchema,
+  description: z.string().max(512),
+  metadata: z.unknown().default({}),
+});
+
 export const createVariantSchema = z.object({
   text: z.string().max(128),
   type: variantTypeSchema,
-  metadata: z.string(),
-  contents: z.record(
-    localeSchema,
-    z.object({
-      description: z.string().max(512),
-      metadata: z.string(),
-    })
-  ),
+  metadata: z.unknown().default({}),
+  contents: z.array(variantContentSchema),
 });
 
-export const variantSchema = createVariantSchema.extend({
-  id: z.string().length(32),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-});
+export const variantSchema = createVariantSchema
+  .extend(idSchema.shape)
+  .extend(timestampSchema.shape);
 
 export const localVariantSchema = createVariantSchema
-  .extend({
-    id: z.string().length(32),
-    createdAt: z.date(),
-    updatedAt: z.date(),
-    content: z.object({
-      description: z.string().max(512),
-      metadata: z.string(),
-    }),
-  })
-  .omit({ contents: true });
+  .omit({ contents: true })
+  .extend(idSchema.shape)
+  .extend(timestampSchema.shape)
+  .extend({ content: variantContentSchema });
 
 export type CreateVariant = z.infer<typeof createVariantSchema>;
 export type Variant = z.infer<typeof variantSchema>;

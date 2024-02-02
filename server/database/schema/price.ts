@@ -1,5 +1,5 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { Currency, Locale } from "~/utils/models";
+import { Currency, Locale } from "~/models";
 import { locales } from "./locale";
 import { products } from "./product";
 import { relations } from "drizzle-orm";

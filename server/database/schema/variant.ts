@@ -6,10 +6,10 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
-import { VariantType } from "~/utils/models/variant";
+import { VariantType } from "~/models/variant";
 import { productVariants } from "./product";
 import { storageUnits } from "./storage";
-import { Locale } from "~/utils/models";
+import { Locale } from "~/models";
 
 export const variants = sqliteTable("variants", {
   id: text("id").primaryKey(),
@@ -25,7 +25,7 @@ export const variants = sqliteTable("variants", {
 });
 
 export const variantContents = sqliteTable(
-  "variantsContent",
+  "variantContents",
   {
     variantId: text("variantId")
       .notNull()

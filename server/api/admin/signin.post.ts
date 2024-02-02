@@ -1,4 +1,4 @@
-import { userSigninSchema } from "~/utils/models";
+import { userSigninSchema } from "~/models";
 import { Argon2id } from "oslo/password";
 
 export default defineEventHandler(async (event) => {

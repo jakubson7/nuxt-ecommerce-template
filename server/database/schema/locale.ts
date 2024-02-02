@@ -5,7 +5,7 @@ import { categoryContents } from "./category";
 import { variantContents } from "./variant";
 import { prices } from "./price";
 import { offerContents } from "./offer";
-import { Locale } from "~/utils/models";
+import { Locale } from "~/models";
 
 export const locales = sqliteTable("locales", {
   id: text("id").$type<Locale>().primaryKey(),

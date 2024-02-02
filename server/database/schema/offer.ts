@@ -4,7 +4,7 @@ import {
   text,
   primaryKey,
 } from "drizzle-orm/sqlite-core";
-import { Locale } from "~/utils/models";
+import { Locale } from "~/models";
 import { locales } from "./locale";
 import { relations } from "drizzle-orm";
 

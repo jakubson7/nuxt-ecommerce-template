@@ -1,6 +1,6 @@
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { UserRole } from "~/utils/models";
+import { UserRole } from "~/models";
 
 export const users = sqliteTable("users", {
   id: text("id").notNull().primaryKey(),

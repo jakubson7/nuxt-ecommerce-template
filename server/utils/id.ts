@@ -1,5 +1,5 @@
 import { generateId } from "lucia";
 
-export function genID() {
+export function genId() {
   return generateId(32);
 }
